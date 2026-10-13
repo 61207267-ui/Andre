@@ -1,0 +1,39 @@
+<h3 class="text-center">Formulario</h3>
+<form (submit)="guardar($event)">
+    <div>
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" id="nombre" [formField]="personaFormulario.nombre" class="form-control">
+        @if (personaFormulario.nombre().invalid() && personaFormulario.nombre().touched()) {
+            @for (error of personaFormulario.nombre().errors(); track $index) {
+                <span class="text-danger"> {{error.message}} </span>
+            }
+        }
+    </div>
+    <div>
+        <label for="edad" class="form-label">Edad</label>
+        <input type="number" id="edad" [formField]="personaFormulario.edad" class="form-control">
+        @if (personaFormulario.edad().invalid() && personaFormulario.edad().touched()) {
+            @for (error of personaFormulario.edad().errors(); track $index) {
+                <span class="text-danger"> {{error.message}} </span>
+            }
+        }
+    </div>
+    <button class="btn btn-success my-3" type="submit" [disabled]="personaFormulario().invalid()">Guardar</button>
+</form>
+
+<table class="table table-bordered mt-5">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (persona of listaPersonas; track $index) {
+            <tr>
+                <td> {{persona.nombre}} </td>
+                <td> {{persona.edad}} </td>
+            </tr>
+        }
+    </tbody>
+</table>

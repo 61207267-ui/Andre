@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { PersonaComponente } from './components/persona-componente/persona-componente';
 
 @Component({
-  imports: [RouterOutlet, PersonaComponente],
+  imports: [PersonaComponente],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

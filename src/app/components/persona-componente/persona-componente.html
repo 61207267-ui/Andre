@@ -1,5 +1,6 @@
 <h3 class="text-center">Formulario</h3>
 <form (submit)="guardar($event)">
+
     <div>
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" id="nombre" [formField]="personaFormulario.nombre" class="form-control">
@@ -9,6 +10,18 @@
             }
         }
     </div>
+    
+
+    <div>
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" id="apellido" [formField]="personaFormulario.apellido" class="form-control">
+        @if (personaFormulario.apellido().invalid() && personaFormulario.apellido().touched()) {
+            @for (error of personaFormulario.apellido().errors(); track $index) {
+                <span class="text-danger"> {{error.message}} </span>
+            }
+        }
+    </div>
+
     <div>
         <label for="edad" class="form-label">Edad</label>
         <input type="number" id="edad" [formField]="personaFormulario.edad" class="form-control">
@@ -18,21 +31,58 @@
             }
         }
     </div>
+
+    <div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" [formField]="personaFormulario.email" class="form-control">
+        @if (personaFormulario.email().invalid() && personaFormulario.email().touched()) {
+            @for (error of personaFormulario.email().errors(); track $index) {
+                <span class="text-danger"> {{error.message}} </span>
+            }
+        }
+    </div>
+
+    <div>
+        <label for="rol" class="form-label">Rol</label>
+        <input type="text" id="rol" [formField]="personaFormulario.rol" class="form-control">
+        @if (personaFormulario.rol().invalid() && personaFormulario.rol().touched()) {
+            @for (error of personaFormulario.rol().errors(); track $index) {
+                <span class="text-danger"> {{error.message}} </span>
+            }
+        }
+    </div>
+    
     <button class="btn btn-success my-3" type="submit" [disabled]="personaFormulario().invalid()">Guardar</button>
 </form>
 
 <table class="table table-bordered mt-5">
     <thead>
         <tr>
+            <th>id</th>
             <th>Nombre</th>
+            <th>Apellido</th>
             <th>Edad</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones </th>
         </tr>
     </thead>
     <tbody>
         @for (persona of listaPersonas; track $index) {
             <tr>
+                <td> {{persona.id}} </td>
                 <td> {{persona.nombre}} </td>
+                <td> {{persona.apellido}} </td>
                 <td> {{persona.edad}} </td>
+                <td> {{persona.email}} </td>
+                <td> {{persona.rol}} </td>
+                <td>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-danger" (click)="eliminar(persona.id)">Eliminar</button>
+                        <button class="btn btn-warning"  (click)="editar(persona)" >Editar</button>
+
+                    </div>
+                </td>
             </tr>
         }
     </tbody>

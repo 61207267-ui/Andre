@@ -94,7 +94,7 @@ export class PersonaComponente {
   }
 
   async editar(persona: Persona) {
-  // 1. Desplegamos el modal con la lista desplegable de los 5 campos
+  
   const { value: campoSeleccionado } = await Swal.fire({
     title: '¿Qué campo quieres actualizar?',
     input: 'select',
@@ -118,10 +118,10 @@ export class PersonaComponente {
     }
   });
 
-  // Si el usuario da clic en Cancelar o cierra el modal, no hacemos nada
+  
   if (!campoSeleccionado) return;
 
-  // 2. Pedimos el nuevo valor para el campo elegido
+  
   const { value: nuevoValor } = await Swal.fire({
     title: `Actualizar ${campoSeleccionado}`,
     input: campoSeleccionado === 'edad' ? 'number' : 'text',
@@ -138,24 +138,24 @@ export class PersonaComponente {
     }
   });
 
-  // 3. Si ingresó un valor, armamos el objeto modificado y llamamos al servicio
+  
   if (nuevoValor) {
     const personaEditada: Persona = {
       ...persona,
       [campoSeleccionado]: campoSeleccionado === 'edad' ? Number(nuevoValor) : nuevoValor
     };
 
-    // Enviamos el ID y la persona editada a tu servicio
+    
     this.personaService.actualizar(persona.id, personaEditada);
 
-    // Refrescamos la lista en pantalla
+    
     this.mostrar();
 
     Swal.fire({
       title: '¡Actualizado!',
       text: `El campo ${campoSeleccionado} ha sido modificado.`,
       icon: 'success',
-      confirmButtonColor: '#0d6efd'
+      confirmButtonColor: '#7af356'
     });
   }
 }
